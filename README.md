@@ -10,7 +10,7 @@
 
 2. Create shared AWS account for project. Share credentials.
 
-3. Figure out how to provision it via terraform and launch a service on this cloud. [https://developer.hashicorp.com/terraform/intro](https://developer.hashicorp.com/terraform/intro) 
+3.  [Figure out how to provision it via terraform and launch a service on this cloud.](https://developer.hashicorp.com/terraform/intro) 
 
 4. Write out steps/ procedure in README file as we go. This will be part of our deliverable
 
