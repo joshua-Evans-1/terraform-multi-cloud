@@ -4,7 +4,9 @@
 
 ### MacOS
 [AARCH64 M1 Download ](https://releases.hashicorp.com/terraform/1.6.2/terraform_1.6.2_darwin_arm64.zip)
+
 [Intel Download](https://releases.hashicorp.com/terraform/1.6.2/terraform_1.6.2_darwin_amd64.zip)
+
 or
 ```MacOS
 
