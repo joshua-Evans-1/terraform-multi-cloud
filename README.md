@@ -3,8 +3,7 @@
 ## TODO
 1. Everyone download Terraform (TF) to their local machines 
 
-3. Create shared github repo for the project 
-	https://github.com/joshua-Evans-1/terraform-multi-cloud
+3. Create shared [github repo](https://github.com/joshua-Evans-1/terraform-multi-cloud) for the project 
 
 1. Learn how to use TF to provision infrastructure for one cloud.
 
