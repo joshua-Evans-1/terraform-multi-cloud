@@ -29,6 +29,12 @@ sudo apt update && sudo apt install terraform
 ### Windows
 [Download Link](https://releases.hashicorp.com/terraform/1.6.2/terraform_1.6.2_windows_amd64.zip)
 
+## main.tf 
+[main.tf](https://github.com/joshua-Evans-1/terraform-multi-cloud/blob/main/main.tf) 
+
+
+
+
 
 ## TODO
 
