@@ -5,10 +5,9 @@
 
 FYI, we are all using Macs.
 
-#### Install locally
+#### Local Install
 * [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 * [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-    * note: set up AWS IAM user before you do this
 
 #### Cloud provider cccounts
 We created fresh cloud accounts to use for this project.
@@ -17,9 +16,9 @@ We created fresh cloud accounts to use for this project.
 
 
 #### Set Up IAM User in AWS Account - Multi-Dev Setup
-``````
-We created a 'devs' group w/ full admin access for each IAM user in the group.
-``````
+We created a 'devs' group w/ full admin access for each IAM user in the group. 
+If you're working solo (professor?), just create a single accoount with full permissions.
+
 1. log in as root user to [AWS console](https://aws.amazon.com/console/)
 2. go to IAM (Identity and Access Management)   - *not* IAM Identity Center
 3. click Users  (left sidebar)
@@ -34,9 +33,9 @@ We created a 'devs' group w/ full admin access for each IAM user in the group.
 9. select use case: CLI, click through to next screen
 10. name description tag: localmachine  (or something similar.. point is to identify it will be going on your computer)
 11. click Create Access Key to finalize
-12. Download .csv of your access key
+12. Download .csv of your access key. Keep safe as you can't download it again
 
-#### Setup AWS CLI
+#### Setup AWS CLI (local machine)
 * terminal:  `$ which aws` to check for previous install
 * [install instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 * import your access keys .csv into AWS CLI
@@ -49,7 +48,7 @@ We created a 'devs' group w/ full admin access for each IAM user in the group.
 
 
 
-#### Set Up Google Cloud Project
+#### Set Up Google Cloud Project & Service Accounts
 1. go to [google cloud console](https://console.cloud.google.com/)
 2. select project or create if not created yet
 3. select service accounts unde the iam and admin tab
@@ -58,16 +57,25 @@ We created a 'devs' group w/ full admin access for each IAM user in the group.
 4. you will see the user created and click actions on that user
 5. from the dropdown click manage keys
 6. click add key then create key and choose json
-7. key will automatically download keep in a safe place
+7. key will automatically download, keep in a safe place
 
 #### Resource Manager API in Google Cloud
-...
+... ... ..
 
-#### Service Account in GCP
-Seems similar to IAM user in AWS, e.g. we each would have our own service account w/ own keys to download
-if so, see if we can make a permissions group w/ full admin access  that we can add us all into ((like we did on AWS))
 
-#### Initalize Terraform in Workspace Directory (on local machine)
+#### Initalize Terraform in Workspace Directory (local machine)
+tutorial say to go to git repo directory and do 
+```
+$ terraform init
+```
+
+It doesn't work.
+```
+Terraform initialized in an empty directory!
+
+The directory has no Terraform configuration files. You may begin working
+with Terraform immediately by creating Terraform configuration files.
+```
 
 
 --------------------------
