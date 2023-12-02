@@ -1,18 +1,5 @@
 # Setup
 
-Table of Contents
-=================
-<!--ts-->
-* [Prerequisites](#Prerequisites)
-* [AWS](#aws)
-    * [IAM user](#set-up-iam-user-in-aws-account---multi-dev-setup)
-    * [AWS cli](#setup-aws-cli)
-* [GCP](#gcp)
-    * [project init](#set-up-google-cloud-project)
-    * [service account](#service-account-in-gcp)
-<!--te-->
-
-
 Prerequisites
 ===============
 
