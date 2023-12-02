@@ -1,37 +1,45 @@
 # Terraform Multi-Cloud Networking(SDN)
 
-## Terraform Installation
 
-### MacOS
-[AARCH64 M1 Download ](https://releases.hashicorp.com/terraform/1.6.2/terraform_1.6.2_darwin_arm64.zip)
+# Prerequisites
 
-[Intel Download](https://releases.hashicorp.com/terraform/1.6.2/terraform_1.6.2_darwin_amd64.zip)
+FYI, we are all using Macs.
 
-or
-```MacOS
+#### Install locally
+* [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+* [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+    * note: set up AWS IAM user before you do this
 
-brew tap hashicorp/tap
+#### Cloud provider cccounts
+* AWS
+* GCP
 
-brew install hashicorp/tap/terraform
 
-```
 
-### Linux
-```Linux
+#### Set Up IAM User in AWS Account - Multi-Dev Setup
+1. log in as root user to [AWS console](https://aws.amazon.com/console/)
+2. go to IAM (Identity and Access Management)   - *not* IAM Identity Center
+3. click Users  (left sidebar)
+4. click Create User  (button)
+    * name yourself (`yourname_aws_tf`). don't touch anything else. click next
+5. add yourself to 'devs' user group. click next
+6. click Create User to finalize
+7. click on your newly created username
+8. go to 'Create access key'  (top right ish of screen)
+    * FYI: [Access Key docs](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html)
+    * FYI: [Access Key best practices](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html#securing_access-keys)
+9. select use case: CLI, click through to next screen
+10. name description tag: localmachine  (or something similar.. point is to identify it will be going on your computer)
+11. click Create Access Key to finalize
+12. Download .csv of your keys
 
-wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+#### Download AWS CLI
+* 
 
-echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-
-sudo apt update && sudo apt install terraform
-
-```
-### Windows
-[Download Link](https://releases.hashicorp.com/terraform/1.6.2/terraform_1.6.2_windows_amd64.zip)
-
-## main.tf 
-[main.tf](https://github.com/joshua-Evans-1/terraform-multi-cloud/blob/main/main.tf) 
-
+``````
+For a brand-new fresh AWS account, first create an IAM user: 'admin'
+after create admin user, create user group: 'devs'  (w/ full  Admin access. that may change )
+``````
 
 
 
