@@ -47,12 +47,13 @@ If you're working solo (professor?), just create a single accoount with full per
         ```
 
 
-#### Set Up Google Cloud Project
+#### Set Up Google Cloud Project (one time only)
 1. click on the project tab 
 2. select create new project
 3. name it and click create
+4. search for 'Cloud Resource Manager API'. enable it
 
-#### Service Account in GCP
+#### Service Account in GCP - Multi-Dev Setup
 1. go to [google cloud console](https://console.cloud.google.com/)
 2. select project
 3. select service accounts unde the iam and admin tab
@@ -64,17 +65,13 @@ If you're working solo (professor?), just create a single accoount with full per
 7. key will automatically download, keep in a safe place
 
 
-#### Resource Manager API in Google Cloud
-???? do we need this ??
-
-
 #### Initalize Terraform in Workspace Directory (local machine)
 tutorial say to go to git repo directory and do 
 ```
 $ terraform init
 ```
 
-It doesn't work.
+It doesn't work!!!!
 ```
 Terraform initialized in an empty directory!
 
