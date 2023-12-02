@@ -47,10 +47,14 @@ If you're working solo (professor?), just create a single accoount with full per
         ```
 
 
+#### Set Up Google Cloud Project
+1. click on the project tab 
+2. select create new project
+3. name it and click create
 
-#### Set Up Google Cloud Project & Service Accounts
+#### Service Account in GCP
 1. go to [google cloud console](https://console.cloud.google.com/)
-2. select project or create if not created yet
+2. select project
 3. select service accounts unde the iam and admin tab
 3. click create new service account 
     * for the service account name (`yourname_gcp_tf`) don't touch anything else. click create
@@ -59,8 +63,9 @@ If you're working solo (professor?), just create a single accoount with full per
 6. click add key then create key and choose json
 7. key will automatically download, keep in a safe place
 
+
 #### Resource Manager API in Google Cloud
-... ... ..
+???? do we need this ??
 
 
 #### Initalize Terraform in Workspace Directory (local machine)
@@ -76,6 +81,7 @@ Terraform initialized in an empty directory!
 The directory has no Terraform configuration files. You may begin working
 with Terraform immediately by creating Terraform configuration files.
 ```
+
 
 
 --------------------------
