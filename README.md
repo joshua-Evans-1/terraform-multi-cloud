@@ -16,11 +16,9 @@ We created fresh cloud accounts to use for this project.
 * GCP
 
 
-
 #### Set Up IAM User in AWS Account - Multi-Dev Setup
 ``````
-We created a 'devs' group w/ full admin access for each user in the group.
-If you are working 
+We created a 'devs' group w/ full admin access for each IAM user in the group.
 ``````
 1. log in as root user to [AWS console](https://aws.amazon.com/console/)
 2. go to IAM (Identity and Access Management)   - *not* IAM Identity Center
@@ -36,13 +34,20 @@ If you are working
 9. select use case: CLI, click through to next screen
 10. name description tag: localmachine  (or something similar.. point is to identify it will be going on your computer)
 11. click Create Access Key to finalize
-12. Download .csv of your keys. do not lose it
+12. Download .csv of your access key
 
-#### Install AWS CLI
-* terminal: `$ which aws` to check for previous install
-* [instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+#### Setup AWS CLI
+* terminal:  `$ which aws` to check for previous install
+* [install instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+* import your access keys .csv into AWS CLI
+    * [instructions](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-user.html#cli-authentication-user-configure-csv)
+     * csv import instructions don't work unless you manually add User Name column to front of csv as such: (or there are alt instructions at the linked page)
+        ```
+        User Name,Access key ID,Secret access key
+        name_aws_tf,xxxxxxxxx,xxxxxxxxxxx
+        ```
 
-TO DO: associate credential key pair w. aws cli
+
 
 #### Set Up Google Cloud Project
 ...
