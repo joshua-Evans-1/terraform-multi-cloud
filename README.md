@@ -3,7 +3,9 @@
 ## Table of Contents
 
 * [Setup](docs/setup.md)
-
+* Implementation
+    * [GCP](docs/GCPimplement.md)
+    * [AWS](/docs/AWSimplement.md)
 
 
 
