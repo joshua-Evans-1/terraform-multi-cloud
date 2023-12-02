@@ -58,7 +58,7 @@ We created a 'devs' group w/ full admin access for each IAM user in the group.
 4. you will see the user created and click actions on that user
 5. from the dropdown click manage keys
 6. click add key then create key and choose json
-7. key will automatically downloa keep in a safe place
+7. key will automatically download keep in a safe place
 
 #### Resource Manager API in Google Cloud
 ...
