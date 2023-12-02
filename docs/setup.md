@@ -6,7 +6,7 @@ Prerequisites
 #### Install locally
 * [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 * [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-* [gcloud](https://help.okta.com/oag/en-us/content/topics/access-gateway/deploy-gcp-cli.htm)
+* [gcloud](https://cloud.google.com/sdk/docs/install)  (MAYBE)
 
 #### Create cloud provider root cccounts
 * Amazon Web Services (AWS)
