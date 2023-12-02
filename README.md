@@ -50,8 +50,13 @@ We created a 'devs' group w/ full admin access for each IAM user in the group.
 
 
 #### Set Up Google Cloud Project
+1. click on the project tab 
+2. select create new project
+3. name it and click create
+
+#### Service Account in GCP
 1. go to [google cloud console](https://console.cloud.google.com/)
-2. select project or create if not created yet
+2. select project
 3. select service accounts unde the iam and admin tab
 3. click create new service account 
     * for the service account name (`yourname_gcp_tf`) don't touch anything else. click create
@@ -59,13 +64,6 @@ We created a 'devs' group w/ full admin access for each IAM user in the group.
 5. from the dropdown click manage keys
 6. click add key then create key and choose json
 7. key will automatically download keep in a safe place
-
-#### Resource Manager API in Google Cloud
-...
-
-#### Service Account in GCP
-Seems similar to IAM user in AWS, e.g. we each would have our own service account w/ own keys to download
-if so, see if we can make a permissions group w/ full admin access  that we can add us all into ((like we did on AWS))
 
 #### Initalize Terraform in Workspace Directory (on local machine)
 
