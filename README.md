@@ -11,12 +11,17 @@ FYI, we are all using Macs.
     * note: set up AWS IAM user before you do this
 
 #### Cloud provider cccounts
+We created fresh cloud accounts to use for this project.
 * AWS
 * GCP
 
 
 
 #### Set Up IAM User in AWS Account - Multi-Dev Setup
+``````
+We created a 'devs' group w/ full admin access for each user in the group.
+If you are working 
+``````
 1. log in as root user to [AWS console](https://aws.amazon.com/console/)
 2. go to IAM (Identity and Access Management)   - *not* IAM Identity Center
 3. click Users  (left sidebar)
@@ -31,19 +36,28 @@ FYI, we are all using Macs.
 9. select use case: CLI, click through to next screen
 10. name description tag: localmachine  (or something similar.. point is to identify it will be going on your computer)
 11. click Create Access Key to finalize
-12. Download .csv of your keys
+12. Download .csv of your keys. do not lose it
 
-#### Download AWS CLI
-* 
+#### Install AWS CLI
+* terminal: `$ which aws` to check for previous install
+* [instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 
-``````
-For a brand-new fresh AWS account, first create an IAM user: 'admin'
-after create admin user, create user group: 'devs'  (w/ full  Admin access. that may change )
-``````
+TO DO: associate credential key pair w. aws cli
+
+#### Set Up Google Cloud Project
+...
+
+#### Resource Manager API in Google Cloud
+...
+
+#### Service Account in GCP
+Seems similar to IAM user in AWS, e.g. we each would have our own service account w/ own keys to download
+if so, see if we can make a permissions group w/ full admin access  that we can add us all into ((like we did on AWS))
+
+#### Initalize Terraform in Workspace Directory (on local machine)
 
 
-
-
+--------------------------
 ## TODO
 
 1. Everyone download Terraform (TF) to their local machines
