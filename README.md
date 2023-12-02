@@ -4,22 +4,21 @@
 # Prerequisites
 
 FYI, we are all using Macs.
-
-#### Install locally
+#### Dependencies
 * [terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
 * [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-    * note: set up AWS IAM user before you do this
 
 #### Cloud provider cccounts
-We created fresh cloud accounts to use for this project.
+We made fresh cloud accounts to use for this project.
 * AWS
 * GCP
 
 
 #### Set Up IAM User in AWS Account - Multi-Dev Setup
-``````
+
 We created a 'devs' group w/ full admin access for each IAM user in the group.
-``````
+For a single dev replicating this (professor?), just create yourself IAM user with admin access and skip the group
+
 1. log in as root user to [AWS console](https://aws.amazon.com/console/)
 2. go to IAM (Identity and Access Management)   - *not* IAM Identity Center
 3. click Users  (left sidebar)
@@ -41,16 +40,17 @@ We created a 'devs' group w/ full admin access for each IAM user in the group.
 * [install instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 * import your access keys .csv into AWS CLI
     * [instructions](https://docs.aws.amazon.com/cli/latest/userguide/cli-authentication-user.html#cli-authentication-user-configure-csv)
-     * csv import instructions don't work unless you manually add User Name column to front of csv as such: (or there are alt instructions at the linked page)
-        ```
-        User Name,Access key ID,Secret access key
-        name_aws_tf,xxxxxxxxx,xxxxxxxxxxx
-        ```
+        * csv import instructions don't work unless you manually add User Name column to front of csv as such: (or there are alt instructions at the linked page)
+            ```
+            User Name,Access key ID,Secret access key
+            name_aws_tf,xxxxxxxxx,xxxxxxxxxxx
+            ```
 
 
 
 #### Set Up Google Cloud Project
-...
+1. log in as root user to [GCP console](https://console.cloud.google.com/)
+2. create a new project
 
 #### Resource Manager API in Google Cloud
 ...
