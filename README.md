@@ -11,7 +11,33 @@ A project that utilizes terraform to create and deploy a multi-cloud environment
 
 ## Project structure 
 ```
-run "tree" in working directory when fininshed 
+TERRAFORM-MULTI-CLOUD
+├── README.md
+├── docs
+│   ├── AWSimplement.md
+│   ├── GCPimplement.md
+│   ├── VPNimplement.md
+│   ├── setup.md
+│   └── terraformimplementation.md
+└── terraform
+    ├── main.tf
+    ├── modules
+    │   ├── aws
+    │   │   ├── network.tf
+    │   │   ├── output.tf
+    │   │   ├── variables.tf
+    │   │   └── vpc.tf
+    │   ├── gcp
+    │   │   ├── network.tf
+    │   │   ├── output.tf
+    │   │   └── variables.tf
+    │   └── vpn
+    │       ├── aws_vpn.tf
+    │       ├── gcp_vpn.tf
+    │       └── variables.tf
+    ├── outputs.tf
+    ├── terraform.tfvars
+    └── variables.tf
 ```
 --------------------------
 
