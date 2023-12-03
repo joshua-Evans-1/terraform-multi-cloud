@@ -9,6 +9,9 @@ A project that utilizes terraform to create and deploy a multi-cloud environment
     * [AWS](/docs/AWSimplement.md)
     * [VPN](/docs/VPNimplement.md)
 
-
+## Project structure 
+```
+run "tree" in working directory when fininshed 
+```
 --------------------------
 
