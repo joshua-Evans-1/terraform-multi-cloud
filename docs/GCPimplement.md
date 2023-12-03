@@ -1,7 +1,6 @@
 GCP Implementation
 ==================
 
-
 ## terraform initialization
 inside our [main.tf](../terraform/main.tf) file we need to specify our provider and define a module for GCP.
 
@@ -29,8 +28,9 @@ mkdir /terraform/modules/gcp
 inside our gcp module directory we create our files 
 
 ```sh 
-touch network.tf output.tf variables.t
+touch network.tf output.tf variables.tf
 ```
+our [gcp directory](../terraform/modules/gcp/) should now look like:
 ```tree
 gcp
 ├── network.tf
