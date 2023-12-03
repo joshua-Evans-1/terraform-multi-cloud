@@ -41,6 +41,7 @@ TERRAFORM-MULTI-CLOUD
     └── variables.tf
 ```
 ## Deployment 
+Navigate to `terraform` project directory (the one that contains `main.tf`)
 
 after setup and implementation is complete 
 ```sh
