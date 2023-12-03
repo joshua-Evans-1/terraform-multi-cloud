@@ -39,5 +39,20 @@ TERRAFORM-MULTI-CLOUD
     ├── terraform.tfvars
     └── variables.tf
 ```
+## Deployment 
+
+after setup and implementation is complete 
+```sh
+terraform init 
+```
+```sh
+terraform apply
+```
+
+to destroy the project run 
+```sh
+terraform destroy
+```
+
 --------------------------
 
