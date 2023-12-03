@@ -7,6 +7,7 @@ A project that utilizes terraform to create and deploy a multi-cloud environment
     * [Terraform](/docs/terraformimplementation.md)
     * [GCP](docs/GCPimplement.md)
     * [AWS](/docs/AWSimplement.md)
+    * [VPN](/docs/VPNimplement.md)
 
 
 --------------------------
