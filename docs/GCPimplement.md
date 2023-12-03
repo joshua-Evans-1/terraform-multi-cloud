@@ -68,15 +68,34 @@ resource "google_compute_firewall" "ssh-rule" {
 ```
 ### output.tf
 inside our [output.tf](../terraform/modules/gcp/output.tf) file we define our output variables
+```tf output.tf
+output "network_id" {
+    value = google_compute_network.app_network.id
+}
 
+output "gke_config" {
+    value = data.google_client_config.current_config
+}
+
+```
 ### variables.tf
 inside our [variables.tf](../terraform/modules/gcp/variables.tf) file we define our terraform variables
-
-ex. 
 ```tf variables.tf
+# variable definitions for gcp project 
 variable "project_id" {
     type = string
     description = "the id for the gcp project"
     default =  "term-project"
+}
+
+variable "network_name" {
+    type = string
+    description = "the name of the gcp Network Name"
+    default = "project"
+}
+
+variable "subnet_cidr" {
+    type = string
+    description = "Subnet CIDR/ Prefix"
 }
 ```

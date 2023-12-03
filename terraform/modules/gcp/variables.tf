@@ -1,5 +1,4 @@
 # variable definitions for gcp project 
-
 variable "project_id" {
     type = string
     description = "the id for the gcp project"
