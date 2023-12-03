@@ -20,7 +20,6 @@ resource "google_compute_forwarding_rule" "esp_forward" {
   ]
 }
 
-## UP 500 Routing Rule
 resource "google_compute_forwarding_rule" "udp500" {
   name        = "fr-udp500"
   ip_protocol = "UDP"
