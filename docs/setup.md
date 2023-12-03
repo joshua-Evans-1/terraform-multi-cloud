@@ -75,7 +75,7 @@ Repeat for all devs
 
 
 
-gcloud auth
+gcloud setup
 ===========
 1. run gcloud authentication command
     ```sh   
@@ -95,4 +95,8 @@ gcloud auth
 4. set the default working project
     ```sh
     gcloud config set project <project_id>
+    ```
+5. enable gcloud compute engine
+    ```sh
+    gcloud services enable compute.googleapis.com
     ```
