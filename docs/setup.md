@@ -73,22 +73,3 @@ Repeat for all devs
 6. click add key then create key and choose json
 7. key will automatically download keep in a safe place
 
-
-
-Terraform
-======================
-TODO: figure out how to setup & initialize Terraform locally for each of us.
-write the insructions, then move them to Setup.md
-
-#### Initalize Terraform in Workspace Directory (local machine)
-tutorial say to go to git repo directory and do 
-```
-$ terraform init
-```
-
-It doesn't work!!!!
-```
-Terraform initialized in an empty directory!
-
-The directory has no Terraform configuration files. You may begin working
-with Terraform immediately by creating Terraform configuration files.
