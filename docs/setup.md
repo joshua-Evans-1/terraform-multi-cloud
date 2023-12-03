@@ -38,6 +38,8 @@ If you're working solo (professor?), just create a single accoount with full per
 11. click Create Access Key to finalize
 12. Download .csv of your access key, keep in a safe place
 
+
+
 Setup AWS CLI
 =============
 * terminal:   `$ which aws`   to check for previous install (old & new installs don't get along)
@@ -49,6 +51,34 @@ Setup AWS CLI
         User Name,Access key ID,Secret access key
         name_aws_tf,xxxxxxxxx,xxxxxxxxxxx
         ```
+
+## Terraform / AWS Authentication
+Now that you've added your credentials to AWS CLI, they should be i this file: 
+ `~/.aws/credentials`
+
+If you already had multiple AWS credentials, they are all stored in this file, so if you peek inside, it might look something like this:
+```
+$ cat ~/.aws/credentials
+
+[default]
+aws_access_key_id = ...
+aws_secret_access_key = ...
+[yourname_aws_tf]
+aws_access_key_id = ...
+aws_secret_access_key = ...
+```
+Confirm that the credentials for your IAM User `yourname_aws_tf` are in this file
+
+
+Change the line in [terraform.tfvars](../terraform/terraform.tfvars#L10):
+
+    ```tf
+    aws_iAM                     = "<yourname>_aws_tf"
+    aws_cred_file               = "~/.aws/credentials"
+    ```
+
+You do not need to update `aws_cred_file` unless it is stored somewhere other than the default.
+
 
 GCP
 ===
