@@ -5,7 +5,7 @@ we create a VPN on AWS and on GCP that connect to eachother
 ## terraform initialization
 inside our [main.tf](../terraform/main.tf) file we need to define a module for our vpn.
 ```tf main.tf
-module "gcp_aws_vpn" {
+module "vpn" {
     source = "./modules/vpn"
     aws_vpc_id = module.aws_cloud.vpc_id
     aws_route_table_ids = [module.aws_cloud.public_route_table_id, module.aws_cloud.private_route_table_id]
