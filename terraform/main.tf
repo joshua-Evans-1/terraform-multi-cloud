@@ -33,11 +33,11 @@ module "aws" {
     source              = "./modules/aws"
     vpc_cidr_block      = var.aws_vpc_cidr_block
 }
-/*
+
 module "vpn" {
     source              = "./modules/vpn"
+    gcp_vpc_id          = module.gcp.network_id
     aws_vpc_id          = module.aws.vpc_id
-    aws_route_table_ids = [module.aws_cloud.public_route_table_id, module.aws_cloud.private_route_table_id]
-    gcp_network_id      = module.gcp.network_id
+    aws_route_table_ids = [module.aws.public_route_table_id, module.aws.private_route_table_id]
 }
-*/
+

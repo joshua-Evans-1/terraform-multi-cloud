@@ -1,6 +1,17 @@
+variable "name" {
+    type = string
+    description = "AWS-GCP vpn"
+    default = "gcp-aws-vpn"
+}
+
 variable "aws_vpc_id" {
     type = string
     description = "id from aws vpc"
+}
+
+variable "gcp_vpc_id" {
+    type = string
+    description = "id from gcp network"
 }
 
 variable "aws_route_table_ids" {
@@ -8,7 +19,8 @@ variable "aws_route_table_ids" {
     description = "route table ids from aws public and private"
 }
 
-variable "gcp_network_id" {
+variable "project_id" {
     type = string
-    description = "id from gcp network"
+    description = "the id for the gcp project"
+    default =  "term-project-406220"
 }
