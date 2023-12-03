@@ -74,7 +74,7 @@ Repeat for all devs
 7. key will automatically download keep in a safe place
 
 
-=======
+
 gcloud auth
 ===========
 1. run gcloud authentication command
