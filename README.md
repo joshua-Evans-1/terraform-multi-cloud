@@ -46,11 +46,12 @@ after setup and implementation is complete
 ```sh
 terraform init 
 ```
+to deploy the cloud infrastructure
 ```sh
 terraform apply
 ```
 
-to destroy the project run 
+to destroy the cloud infrastructure
 ```sh
 terraform destroy
 ```

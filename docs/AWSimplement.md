@@ -1,40 +1,29 @@
 AWS Implementation
 ==================
 
-## Terraform / AWS Authentication
-During setup, you sould have already downloaded your AWS access keys (.csv) AND imported the key file into AWS CLI.
+## VPC
+VPC = virtual private cloud.
 
-AWS CLI should keep your credentials in this file path: 
- `~/.aws/credentials`
+region = a [cluster of data centers](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/). e.g. us-east-2, us-west-1, etc.
 
-If you have multiple AWS credentials, they are all stored in this fil, so if you peek inside, it might look something like this:
-```
-$ cat ~/.aws/credentials
+AZ (availablity zone) = a discrete data center
 
-[default]
-aws_access_key_id = ...
-aws_secret_access_key = ...
-[yourname_aws_tf]
-aws_access_key_id = ...
-aws_secret_access_key = ...
-```
-Confirm that the credentials for your IAM User `yourname_aws_tf` are in this file
+--------
+Copy paste from this tutorial that I'm following to build AWS VPC (for reference): https://spacelift.io/blog/terraform-aws-vpc
 
-### Authentication
-Authenticate by adding this line to the AWS provider configuration in [main.tf](../terraform/main.tf):
-```
-provider "aws" {
-   ...
-  profile = "yourname_aws_tf"
-}
-```
-If your AWS credentials file is at different location than Terraform expects, also include this attribute:
-```
-provider "aws" {
-   ...
-  shared_credentials_files = ["path/to/file"]
-}
-```
+### i will write it myself as i build
 
-### TODO: Fix harcoded profile name. technically we should not hardcode this in, since we all have different usernames.
-but it works for the moment and doesn't expose the secret
+A VPC spans all the Availability Zones (AZ) in a region. It is always associated with a CIDR range (both IPv4 and IPv6) which defines the number of internal network addresses that may be used internally.
+
+>> Recall: CIDR blocks. A [CIDR block](https://aws.amazon.com/what-is/cidr/) is a collection of IP addresses that share the same network prefix and number of bits. 
+
+Within the VPC, we create subnets that are specific to AZs. It is possible to have multiple subnets in the same AZ. The purpose of subnets is to internally segregate resources contained in the VPC in every AZ. AWS Regions consist of multiple Availability Zones for DR purposes.
+
+When a VPC is created, a corresponding Route Table is also created, which defines a default route that lets the components in the VPC communicate with each other internally. The route table thus created is called the main route table.
+
+Our architecture contains two types of subnets – public and private. Public subnets enable internet access for the components hosted within them, while private subnets don’t. Routes in the route tables drive the decision to enable or disable internet access. When a subnet is associated with a route table that allows internet access, it is called a public subnet. Whereas the subnet associated with the route table that does not allow internet access is called private subnet.
+
+An internet gateway is deployed and associated with the VPC to enable internet traffic within the VPC’s public subnets. Only one internet gateway can be associated with each VPC. Owing to this, and the fact that there is usually a default internet address (0.0.0.0/0) pointing to the internet gateway, as a best practice, it is recommended to create a second route table.
+
+Thus apart from the main route table, our architecture consists of a second route table to which public subnets are explicitly associated. 
+--------
