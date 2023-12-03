@@ -15,7 +15,7 @@ resource "google_compute_subnetwork" "app_subnet" {
 ## this creates firewall rules to enable ssh on our gcp vpc
 resource "google_compute_firewall" "ssh-rule" {
     name = "sshrule"
-    network = google_compute_network.vpc_network.name
+    network = google_compute_network.project_network.name
     allow {
         protocol = "tcp"
         ports = ["22"]
