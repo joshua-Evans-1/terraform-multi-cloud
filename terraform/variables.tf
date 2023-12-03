@@ -1,6 +1,6 @@
 
 # gcp variables
-variable "gcp_credentials_file_name" {
+variable "gcp_cred_file" {
     type = string
     description = "the file name of the gcp credentials file"
 }
