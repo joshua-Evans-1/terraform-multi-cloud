@@ -49,8 +49,8 @@ resource "google_compute_forwarding_rule" "udp4500" {
 }
 
 ## Google Compute Router
-resource "google_compute_router" "gcp_vpn_router" {
-    name = "gcp-vpn-router"
+resource "google_compute_router" "router" {
+    name = "router"
     network = var.gcp_network_id
     
     bgp{
@@ -75,7 +75,7 @@ resource "google_compute_vpn_tunnel"  "gcp_aws_vpn" {
     depends_on = [
         aws_vpn_connection.aws_to_gcp,
         google_compute_vpn_gateway.gcp_aws_gateway,
-        google_compute_router.gcp_vpn_router
+        google_compute_router.router
     ]
 
 }
@@ -103,6 +103,6 @@ resource "google_compute_router_peer" "gcp_vpn_router_peer" {
 
     depends_on = [
         google_compute_router_interface.gcp_vpn_router_interface,
-        google_compute_router.gcp_vpn_router,
+        google_compute_router.router,
     ]
 }

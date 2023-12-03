@@ -24,3 +24,14 @@ variable "gcp_subnet_cidr" {
     type = string
     description = "Subnet CIDR/ Prefix"
 }
+
+# aws variables
+variable "aws_region" {
+    type = string
+    description = "aws region"
+}
+
+variable "aws_iAM" {
+    type = string
+    description = "AWS IAM"
+}
