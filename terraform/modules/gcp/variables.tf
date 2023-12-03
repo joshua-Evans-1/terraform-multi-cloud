@@ -9,7 +9,7 @@ variable "project_id" {
 variable "network_name" {
     type = string
     description = "the name of the gcp Network Name"
-    default = "gcp-application"
+    default = "project"
 }
 
 variable "subnet_cidr" {
@@ -17,22 +17,3 @@ variable "subnet_cidr" {
     description = "Subnet CIDR/ Prefix"
 }
 
-variable "pods_network_cidr" {
-    type = string
-    description = "Pods Subnet CIDR/ Prefix"
-}
-
-variable "services_network_cidr" {
-    type = string
-    description = "Services Subnet CIDR/ Prefix"
-}
-
-variable "cluster_name"{
-    type = string
-    description = "Cluster Name"
-}
-
-variable "cluster_zone"{
-    type = string
-    description = "CLuster Zone name"
-}
