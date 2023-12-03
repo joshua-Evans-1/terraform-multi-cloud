@@ -36,6 +36,11 @@ variable "aws_iAM" {
     description = "AWS IAM"
 }
 
+variable "aws_cred_file" {
+    type = string
+    description = "aws credentials file"
+}
+
 variable "aws_vpc_cidr_block" {
     type = string
     description = "Subnet CIDR/ Prefix"
