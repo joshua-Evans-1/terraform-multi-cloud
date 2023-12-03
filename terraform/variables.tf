@@ -35,3 +35,8 @@ variable "aws_iAM" {
     type = string
     description = "AWS IAM"
 }
+
+variable "aws_vpc_cidr_block" {
+    type = string
+    description = "Subnet CIDR/ Prefix"
+}
