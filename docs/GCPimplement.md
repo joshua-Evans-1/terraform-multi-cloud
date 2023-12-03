@@ -6,15 +6,28 @@ inside our [main.tf](../terraform/main.tf) file we need to specify our provider 
 
 provider specification
 ```tf main.tf
+terraform {
+    required_providers {
+        google = {
+            source = "hashicorp/google"
+            version = "~> 4.51.0"
+        }
+    }
+}
+
 provider "google" {
-    version = "~> 3.38"
+    region      = var.gcp_region_name
+    credentials = file(var.gcp_cred_file)
+    project     = var.gcp_project_id
 }
 ```
 module definition
 
 ```tf main.tf
-module "gcp_cloud" {
-    source                 = "./modules/gcp"
+module "gcp" {
+    source              = "./modules/gcp"
+    subnet_cidr         = var.gcp_subnet_cidr
+    network_name        = var.gcp_network_name
 }
 ```
 ## GCP Module 
@@ -70,13 +83,8 @@ resource "google_compute_firewall" "ssh-rule" {
 inside our [output.tf](../terraform/modules/gcp/output.tf) file we define our output variables
 ```tf output.tf
 output "network_id" {
-    value = google_compute_network.app_network.id
+    value = google_compute_network.project_network.id
 }
-
-output "gke_config" {
-    value = data.google_client_config.current_config
-}
-
 ```
 ### variables.tf
 inside our [variables.tf](../terraform/modules/gcp/variables.tf) file we define our terraform variables
@@ -85,7 +93,7 @@ inside our [variables.tf](../terraform/modules/gcp/variables.tf) file we define 
 variable "project_id" {
     type = string
     description = "the id for the gcp project"
-    default =  "term-project"
+    default =  "term-project-406220"
 }
 
 variable "network_name" {
