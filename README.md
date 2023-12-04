@@ -1,5 +1,7 @@
 # Terraform Multi-Cloud Networking (SDN)
-A project that utilizes terraform to create and deploy a multi-cloud environment using amazon(AWS) and google cloud(GCP). terraform creates a vpn between the two cloud environments to connect them. 
+A project that utilizes terraform to create and deploy a highly available VPN connections between Google Cloud (GCP) and Amazon Web Services (AWS) for direct communication between VPC networks across the two cloud platforms.
+
+
 ## Table of Contents
 
 * [Setup](docs/setup.md)
@@ -11,6 +13,10 @@ A project that utilizes terraform to create and deploy a multi-cloud environment
 * [deployment](#deployment)
 
 ## Project structure 
+### cloud infastructure diagram
+![diagram](/docs/diagram.jpg)
+
+### terraform project structure
 ```
 TERRAFORM-MULTI-CLOUD
 ├── README.md
