@@ -41,17 +41,18 @@ mkdir /terraform/modules/gcp
 inside our gcp module directory we create our files 
 
 ```sh 
-touch network.tf output.tf variables.tf
+touch network.tf output.tf variables.tf compute.tf
 ```
 our [gcp directory](../terraform/modules/gcp/) should now look like:
 ```tree
 gcp
 ├── network.tf
 ├── output.tf
+├── compute.tf
 └── variables.tf
 ```
 ### network.tf
-inside our [network.tf](../terraform/modules/gcp/network.tf) file we define our vpc and subnets
+inside our [network.tf](../terraform/modules/gcp/network.tf) file we define our vpc and subnets and firewalls
 ```tf network.tf
 ## this creates our VPC Network inside gcp
 resource "google_compute_network" "project_network" {
@@ -141,5 +142,36 @@ variable "ssh_public_key" {
   description = "ssh public key for ssh into compute instace"
   type        = string
   sensitive   = true
+}
+```
+inside our [compute.tf](../terraform/modules/gcp/compute.tf) file we define a virtual machine inside gcp
+```
+data "google_client_openid_userinfo" "me" {}
+
+resource "google_compute_instance" "vm" {
+    name = "${var.network_name}-vm"
+    machine_type = var.machine_type
+    zone         = "us-east1-b"
+    tags         = ["http-server"]
+    
+    boot_disk {
+        initialize_params {
+            image = "debian-cloud/debian-11"
+        }
+    }
+
+    network_interface {
+        network = google_compute_network.project_network.id
+        subnetwork = google_compute_subnetwork.subnet.id
+        access_config {
+        }
+    }
+
+    metadata = {
+        ssh-keys = "${split("@", data.google_client_openid_userinfo.me.email)[0]}:${var.ssh_public_key}"
+    }
+
+    metadata_startup_script = file("${path.module}/startup_script.sh")
+    depends_on = [ google_compute_subnetwork.subnet ]
 }
 ```
