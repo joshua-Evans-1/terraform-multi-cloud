@@ -22,7 +22,7 @@ variable "gcp_network_name" {
 
 variable "gcp_subnet_cidr" {
     type = string
-    description = "Subnet CIDR/ Prefix"
+    description = "GCP Subnet CIDR/ Prefix"
 }
 
 # aws variable declarations
@@ -43,5 +43,5 @@ variable "aws_cred_file" {
 
 variable "aws_vpc_cidr_block" {
     type = string
-    description = "Subnet CIDR/ Prefix"
+    description = "AWS Subnet CIDR/ Prefix"
 }

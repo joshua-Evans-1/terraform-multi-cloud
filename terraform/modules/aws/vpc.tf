@@ -1,41 +1,44 @@
-## AWS Availability Zones
-data "aws_availability_zones" "available" {
-    state                   = "available"
-}
-
-## Backend Database Network
+# VPC 
+# a VPC is always associated with a CIDR range, so we give it one
 resource "aws_vpc" "vpc_network" {
     cidr_block              = var.vpc_cidr_block
 }
 
-## Subnets
-resource "aws_subnet" "public_subnets" {
+# PUBLIC Subnet
+# Create a public subnet within the VPC
+# can be scaled to add more, but we are just doing one
+resource "aws_subnet" "public_subnet" {
     vpc_id                  = aws_vpc.vpc_network.id
-    count                   = length(data.aws_availability_zones.available.names)
-    cidr_block              = cidrsubnet(var.vpc_cidr_block,8,count.index)
-    availability_zone       = element(data.aws_availability_zones.available.names,count.index)
+    
+    # give the public subnet a public IP address
     map_public_ip_on_launch = true
 
-    depends_on = [
-        aws_vpc.vpc_network
-    ]
+    # assign a subset of the VPC's cidr block to the subnet
+    cidr_block              = cidrsubnet(var.vpc_cidr_block,8,44)
 
-}
-
-resource "aws_subnet" "private_subnets" {
-    vpc_id                  = aws_vpc.vpc_network.id
-    count                   = length(data.aws_availability_zones.available.names)
-    cidr_block              = cidrsubnet(var.vpc_cidr_block,8,"${10+count.index}")
-    availability_zone       = element(data.aws_availability_zones.available.names,count.index)
     tags  = {
-        Name                = "Private Subnet - ${element(data.aws_availability_zones.available.names,count.index)}"
+        Name                = "Public Subnet"
     }
 
     depends_on = [
         aws_vpc.vpc_network
     ]
+
 }
 
-resource "aws_eip" "nat_public_ip"{
-    domain = "vpc"
+# PRIVATE Subnet
+# Create private a subnet within the VPC
+resource "aws_subnet" "private_subnet" {
+    vpc_id                  = aws_vpc.vpc_network.id
+
+    # assign a subset of the VPC's cidr block to the subnet
+    cidr_block              = cidrsubnet(var.vpc_cidr_block,8,22)
+
+    tags  = {
+        Name                = "Private Subnet"
+    }
+
+    depends_on = [
+        aws_vpc.vpc_network
+    ]
 }
