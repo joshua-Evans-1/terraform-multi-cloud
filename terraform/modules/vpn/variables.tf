@@ -25,3 +25,9 @@ variable "project_id" {
     description = "the id for the gcp project"
     default =  "term-project-406220"
 }
+
+variable "gcp_asn" {
+  description = "Google Cloud side ASN"
+  type        = number
+  default     = 65000
+}

@@ -1,6 +1,7 @@
-resource "google_compute_address" "vpn_ip" {
-    name        = var.name
-}
+# I don't thnk this is needed for HA VPN. 
+# resource "google_compute_address" "vpn_ip" {
+#     name        = var.name
+# }
 
 resource "google_compute_ha_vpn_gateway" "gcp-gateway" {
     name        = "${var.name}-ha-gateway"
