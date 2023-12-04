@@ -36,18 +36,9 @@ module "aws" {
     vpc_cidr_block      = var.aws_vpc_cidr_block
 }
 
-# WITHOUT aws private route table... i can't figure out if we need it or not
 module "vpn" {
     source              = "./modules/vpn"
     gcp_vpc_id          = module.gcp.network_id
     aws_vpc_id          = module.aws.vpc_id
-    aws_route_table_ids = [module.aws.public_route_table_id]
+    aws_route_table_ids = [module.aws.public_route_table_id, module.aws.private_route_table_id]
 }
-
-# WITH ROUTE TABLE ID  for aws PRIVATE route table
-# module "vpn" {
-#     source              = "./modules/vpn"
-#     gcp_vpc_id          = module.gcp.network_id
-#     aws_vpc_id          = module.aws.vpc_id
-#     aws_route_table_ids = [module.aws.public_route_table_id, module.aws.private_route_table_id]
-# }

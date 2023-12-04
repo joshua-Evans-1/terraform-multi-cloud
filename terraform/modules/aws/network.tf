@@ -49,7 +49,7 @@ resource "aws_route_table" "public_route_table" {
     ]
 }
 
-# Associate Public Route Table w/ Public Subnet
+# associate PUBLIC Route Table w/ Public Subnet
 resource "aws_route_table_association" "public_route_table_association" {
     subnet_id      = aws_subnet.public_subnet.id
     route_table_id = aws_route_table.public_route_table.id
@@ -61,31 +61,32 @@ resource "aws_route_table_association" "public_route_table_association" {
 }
 
 # PRIVATE Route Table
-# "The private route table is associated with the private subnets which enables the private subnets to interact with the internet." WHYYYY?????
-# I'm not sure that we need a private route table taht connects to the internet??? like why do w have this???
-# resource "aws_route_table" "private_route_table" {
-#     vpc_id = aws_vpc.vpc_network.id
-#     route {
-#         cidr_block = "0.0.0.0/0"
-#         gateway_id = aws_nat_gateway.nat_gw.id
-#     }
+# Makes it so the private subnets can send outbound traffic to the internet via the NAT gateway
+# But they cannot receive inbound traffic from the internet, because they are private.
 
-#     depends_on = [
-#         aws_vpc.vpc_network,
-#         aws_nat_gateway.nat_gw
-#     ]
-# }
+resource "aws_route_table" "private_route_table" {
+    vpc_id = aws_vpc.vpc_network.id
 
+    # route outbound internet traffic to the NAT gw
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = aws_nat_gateway.nat_gw.id
+    }
 
-# ## Private Route Table Association => Private subnets
-# resource "aws_route_table_association" "private_route_table_association" {
-#     count          = length(data.aws_availability_zones.available.names)
-#     subnet_id      = element(aws_subnet.private_subnet.*.id,count.index)
-#     route_table_id = aws_route_table.private_route_table.id
+    depends_on = [
+        aws_vpc.vpc_network,
+        aws_nat_gateway.nat_gw
+    ]
+}
 
-#     depends_on = [
-#         aws_subnet.private_subnet,
-#         aws_route_table.private_route_table,
-#     ]
-# }
+# associate PRIVATE Route Table w/ private Subnet
+resource "aws_route_table_association" "private_route_table_association" {
+    subnet_id      = aws_subnet.private_subnet.id
+    route_table_id = aws_route_table.private_route_table.id
+
+    depends_on = [
+        aws_subnet.private_subnet,
+        aws_route_table.private_route_table,
+    ]
+}
 
