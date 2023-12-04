@@ -17,8 +17,6 @@ resource "google_compute_external_vpn_gateway" "external_gateway" {
   }
 }
 
-
-## Google Compute Router
 resource "google_compute_router" "router" {
     name        = "${var.name}router"
     network     = var.gcp_vpc_id
@@ -31,7 +29,6 @@ resource "google_compute_router" "router" {
         aws_customer_gateway.google,
     ]
 }
-
 
 resource "google_compute_vpn_tunnel" "vpn_tunnel" {
     name                            = "${var.name}-tunnel"
@@ -48,9 +45,7 @@ resource "google_compute_vpn_tunnel" "vpn_tunnel" {
     ]
 }
 
-## Computer Router Interface
-
-resource "google_compute_router_interface" "gcp_vpn_router_interface" {
+resource "google_compute_router_interface" "router_interface" {
     name        = "${var.name}-router-interface"
     router      = google_compute_router.router.name
     ip_range    = "${aws_vpn_connection.aws_to_gcp.tunnel1_cgw_inside_address}/30"
@@ -62,16 +57,15 @@ resource "google_compute_router_interface" "gcp_vpn_router_interface" {
     ]
 }
 
-## Router Peer
-resource "google_compute_router_peer" "gcp_vpn_router_peer" {
+resource "google_compute_router_peer" "router_peer" {
     name = "${var.name}-bgp1"
     router = google_compute_router.router.name
     peer_ip_address = aws_vpn_connection.aws_to_gcp.tunnel1_vgw_inside_address
     peer_asn = aws_vpn_connection.aws_to_gcp.tunnel1_bgp_asn  
-    interface  = google_compute_router_interface.gcp_vpn_router_interface.name
+    interface  = google_compute_router_interface.router_interface.name
 
     depends_on = [
-        google_compute_router_interface.gcp_vpn_router_interface,
+        google_compute_router_interface.router_interface,
         google_compute_router.router,
     ]
 }
