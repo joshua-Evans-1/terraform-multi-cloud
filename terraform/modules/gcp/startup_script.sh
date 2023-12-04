@@ -1,7 +1,5 @@
 #!/bin/bash
 apt update
-apt install -y nginx
-ufw allow '${ufw_allow_nginx}'
 
 cat <<EOF > /var/www/html/index.html
 <!DOCTYPE html>
@@ -20,6 +18,3 @@ cat <<EOF > /var/www/html/index.html
    </body>
 </html>
 EOF
-
-systemctl enable nginx
-systemctl restart nginx
