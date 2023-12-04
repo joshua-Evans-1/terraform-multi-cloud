@@ -10,7 +10,7 @@ resource "google_compute_ha_vpn_gateway" "gcp-gateway" {
 resource "google_compute_external_vpn_gateway" "external_gateway" {
   name            = "aws"
   redundancy_type = "SINGLE_IP_INTERNALLY_REDUNDANT"
-  project = var.project_id
+  project         = var.project_id
       interface {
     id            = 0
     ip_address = aws_vpn_connection.aws_to_gcp.tunnel1_address
