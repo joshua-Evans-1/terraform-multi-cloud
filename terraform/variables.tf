@@ -1,5 +1,5 @@
 
-# gcp variables
+# gcp variable declarations
 variable "gcp_cred_file" {
     type = string
     description = "the file name of the gcp credentials file"
@@ -25,7 +25,7 @@ variable "gcp_subnet_cidr" {
     description = "GCP Subnet CIDR/ Prefix"
 }
 
-# aws variables
+# aws variable declarations
 variable "aws_region" {
     type = string
     description = "aws region"

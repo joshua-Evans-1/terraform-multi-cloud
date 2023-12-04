@@ -11,6 +11,7 @@ terraform {
     }
 }
 
+#PROVIDERS
 provider "aws" {
     region              = var.aws_region
     profile             = var.aws_iAM
@@ -23,6 +24,7 @@ provider "google" {
     project             = var.gcp_project_id
 }
 
+#MODULES
 module "gcp" {
     source              = "./modules/gcp"
     subnet_cidr         = var.gcp_subnet_cidr
