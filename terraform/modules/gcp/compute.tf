@@ -1,3 +1,5 @@
+data "google_client_openid_userinfo" "me" {}
+
 resource "google_compute_instance" "vm" {
     name = "${var.network_name}-vm"
     machine_type = var.machine_type
@@ -16,6 +18,11 @@ resource "google_compute_instance" "vm" {
         access_config {
         }
     }
+
+    metadata = {
+         ssh-keys = "${split("@", data.google_client_openid_userinfo.me.email)[0]}:${var.ssh_public_key}"
+    }
+
     metadata_startup_script = file("${path.module}/nginx_install.sh")
     depends_on = [ google_compute_subnetwork.subnet ]
 }

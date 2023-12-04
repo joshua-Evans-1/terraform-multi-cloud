@@ -25,15 +25,21 @@ provider "google" {
 }
 
 #MODULES
+module "key" {
+    source              = "./modules/key"
+}
+
 module "gcp" {
     source              = "./modules/gcp"
     subnet_cidr         = var.gcp_subnet_cidr
     network_name        = var.gcp_network_name
+    ssh_public_key      = module.key.public_key
 }
 
 module "aws" {
     source              = "./modules/aws"
     vpc_cidr_block      = var.aws_vpc_cidr_block
+    aws_public_key_pair = module.key.aws_public_key_pair
 }
 
 module "vpn" {

@@ -22,3 +22,9 @@ variable "machine_type" {
   type        = string
   default     = "f1-micro"
 }
+
+variable "ssh_public_key" {
+  description = "ssh public key for ssh into compute instace"
+  type        = string
+  sensitive   = true
+}

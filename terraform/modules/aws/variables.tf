@@ -16,8 +16,10 @@ variable "ami" {
   default     = "ami-0230bd60aa48260c6"
 }
 
-variable "bastion_key_name" {
-	type = string
-	description = "Bastion Instance Key Name"
-    default = "aws_bastion_key"
+variable "aws_public_key_pair" {
+	type = object({
+    key_name = string
+    public_key = string
+  })
+	description = "aws_key_pair for EC2"
 }

@@ -12,3 +12,7 @@ output "gcp_vm_public_ip" {
 output "gcp_vm_private_ip" {
     value = google_compute_instance.vm.network_interface.0.network_ip
 }
+
+output "gcp_ssh_username" {
+    value = "${split("@", data.google_client_openid_userinfo.me.email)[0]}"
+}
