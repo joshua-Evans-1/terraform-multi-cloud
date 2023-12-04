@@ -5,7 +5,7 @@ resource "google_compute_network" "project_network" {
 }
 
 ## this create our subnets
-resource "google_compute_subnetwork" "app_subnet" {
+resource "google_compute_subnetwork" "subnet" {
     name          = "${var.network_name}-subnet"
     ip_cidr_range = var.subnet_cidr
     network       = "${var.network_name}-vpc"
