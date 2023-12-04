@@ -23,13 +23,14 @@ variable "aws_route_table_ids" {
 variable "project_id" {
     type = string
     description = "the id for the gcp project"
-    default =  "term-project-406220"
+    # default =  "term-project-406220"
+    default =  "term-project-v2"
 }
 
 variable "gcp_asn" {
   description = "Google Cloud side ASN"
   type        = number
-  default     = 65000
+  default     = 65001
 }
 
 variable "subnet_cidr" {
