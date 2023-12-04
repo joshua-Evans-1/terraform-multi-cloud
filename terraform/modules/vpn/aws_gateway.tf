@@ -1,9 +1,9 @@
 
-resource "aws_vpn_gateway" "virtual_gw"{
+resource "aws_vpn_gateway" "gateway"{
     vpc_id = var.aws_vpc_id
 }
 
-resource "aws_vpn_gateway_route_propagation" "public_private" {
+resource "aws_vpn_gateway_route_propagation" "route_propagation" {
     count = length(var.aws_route_table_ids)
     route_table_id = element(var.aws_route_table_ids,count.index)
     vpn_gateway_id = aws_vpn_gateway.virtual_gw.id
@@ -23,7 +23,7 @@ resource "aws_customer_gateway" "google" {
     ]
 }
 
-resource "aws_vpn_connection" "aws_to_gcp" {
+resource "aws_vpn_connection" "connection" {
     vpn_gateway_id = aws_vpn_gateway.virtual_gw.id
     customer_gateway_id = aws_customer_gateway.google.id
     type = "ipsec.1"
