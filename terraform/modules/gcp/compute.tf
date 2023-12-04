@@ -20,9 +20,9 @@ resource "google_compute_instance" "vm" {
     }
 
     metadata = {
-         ssh-keys = "${split("@", data.google_client_openid_userinfo.me.email)[0]}:${var.ssh_public_key}"
+        ssh-keys = "${split("@", data.google_client_openid_userinfo.me.email)[0]}:${var.ssh_public_key}"
     }
 
-    metadata_startup_script = file("${path.module}/nginx_install.sh")
+    metadata_startup_script = file("${path.module}/startup_script.sh")
     depends_on = [ google_compute_subnetwork.subnet ]
 }
