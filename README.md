@@ -19,28 +19,37 @@ A project that utilizes terraform to create and deploy a highly available VPN co
 ### terraform project structure
 ```
 TERRAFORM-MULTI-CLOUD
+.
 ├── README.md
 ├── docs
 │   ├── AWSimplement.md
 │   ├── GCPimplement.md
 │   ├── VPNimplement.md
+│   ├── diagram.jpg
 │   ├── setup.md
 │   └── terraformimplementation.md
 └── terraform
     ├── main.tf
     ├── modules
     │   ├── aws
+    │   │   ├── compute.tf
     │   │   ├── network.tf
     │   │   ├── output.tf
+    │   │   ├── securitygroup.tf
     │   │   ├── variables.tf
     │   │   └── vpc.tf
     │   ├── gcp
+    │   │   ├── compute.tf
     │   │   ├── network.tf
     │   │   ├── output.tf
+    │   │   ├── startup_script.sh
     │   │   └── variables.tf
+    │   ├── key
+    │   │   ├── keygen.tf
+    │   │   └── output.tf
     │   └── vpn
-    │       ├── aws_vpn.tf
-    │       ├── gcp_vpn.tf
+    │       ├── aws_gateway.tf
+    │       ├── gcp_gateway.tf
     │       └── variables.tf
     ├── outputs.tf
     ├── terraform.tfvars
