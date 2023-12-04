@@ -29,3 +29,11 @@ output "public_route_table_id" {
 output "private_route_table_id" {
     value = aws_route_table.private_route_table.id
 }
+
+output "aws_bastion_public_ip" {
+    value = aws_instance.bastion-host.*.public_ip
+}
+
+output "aws_bastion_private_ip" {
+    value = aws_instance.bastion-host.*.private_ip
+}

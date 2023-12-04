@@ -34,17 +34,12 @@ resource "aws_security_group" "allow-ssh" {
 resource "aws_security_group" "allow-ping" {
   vpc_id      = aws_vpc.vpc_network.id
   name        = "allow-ping"
-  description = "security group allows icmp in & out (for ping)"
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "icmp"
-  }
-
+  description = "security group to allow ping (icmp)"
   ingress {
-    from_port   = 0
+    from_port   = 8
     to_port     = 0
     protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
     Name = "allow-ping"

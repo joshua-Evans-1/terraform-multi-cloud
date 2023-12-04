@@ -33,7 +33,12 @@ variable "gcp_asn" {
   default     = 65001
 }
 
-variable "subnet_cidr" {
+variable "gcp_subnet_cidr" {
     type = string
-    description = "Subnet CIDR/ Prefix"
+    description = "GCP Subnet CIDR/ Prefix"
+}
+
+variable "aws_vpc_cidr_block" {
+    type = string
+    description = "AWS VPC CIDR/ Prefix"
 }

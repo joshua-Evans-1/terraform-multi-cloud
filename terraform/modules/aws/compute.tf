@@ -43,4 +43,12 @@ resource "aws_instance" "bastion-host" {
   tags = {
             Name = "bastion-host"
         }
+  
+  depends_on = [
+		aws_subnet.public_subnet,
+    aws_security_group.allow-all-egress,
+    aws_security_group.allow-ssh,
+    aws_security_group.allow-ping,
+    aws_security_group.allow-rdp
+	]
 }

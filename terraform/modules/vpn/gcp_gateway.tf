@@ -24,7 +24,7 @@ resource "google_compute_router" "router" {
         asn                = var.gcp_asn
         advertise_mode    = "CUSTOM"
         advertised_ip_ranges {
-            range = var.subnet_cidr
+            range = var.gcp_subnet_cidr
         }
     } 
 }
@@ -41,6 +41,12 @@ resource "google_compute_vpn_tunnel" "vpn_tunnel" {
     vpn_gateway_interface           = each.value.vpn_gateway_interface
     peer_external_gateway           = google_compute_external_vpn_gateway.external_gateway.self_link
     peer_external_gateway_interface = each.key
+
+    depends_on = [
+        google_compute_router.router,
+        google_compute_ha_vpn_gateway.gcp-gateway,
+        google_compute_external_vpn_gateway.external_gateway
+    ]
 }
 
 resource "google_compute_router_interface" "interfaces" {
@@ -50,7 +56,13 @@ resource "google_compute_router_interface" "interfaces" {
   router     = google_compute_router.router.name
   ip_range   = each.value.cgw_inside_address
   vpn_tunnel = google_compute_vpn_tunnel.vpn_tunnel[each.key].name
+
+  depends_on = [
+        google_compute_router.router,
+        google_compute_vpn_tunnel.vpn_tunnel,
+    ]
 }
+
 resource "google_compute_router_peer" "router_peers" {
   for_each        = local.external_vpn_gateway_interfaces
 
@@ -60,8 +72,10 @@ resource "google_compute_router_peer" "router_peers" {
   peer_asn        = each.value.asn
   interface       = google_compute_router_interface.interfaces[each.key].name
 
-  # NB: tags not supported here
-  # tags = merge({Name = var.name}, local.interpolated_tags)
+  depends_on = [
+        google_compute_router.router,
+        google_compute_router_interface.interfaces,
+    ]
 }
 
 locals {
