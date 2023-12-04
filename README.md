@@ -12,49 +12,28 @@ A project that utilizes terraform to create and deploy a highly available VPN co
     * [VPN module](/docs/VPNimplement.md)
 * [Deployment](#deployment)
 
-## Project structure 
-### cloud infastructure diagram
-![diagram](/docs/diagram.jpg)
 
-### terraform project structure
+## Project Structure
 ```
 TERRAFORM-MULTI-CLOUD
 .
 ├── README.md
 ├── docs
-│   ├── AWSimplement.md
-│   ├── GCPimplement.md
-│   ├── VPNimplement.md
-│   ├── diagram.jpg
-│   ├── setup.md
-│   └── terraformimplementation.md
 └── terraform
     ├── main.tf
     ├── modules
     │   ├── aws
-    │   │   ├── compute.tf
-    │   │   ├── network.tf
-    │   │   ├── output.tf
-    │   │   ├── securitygroup.tf
-    │   │   ├── variables.tf
-    │   │   └── vpc.tf
     │   ├── gcp
-    │   │   ├── compute.tf
-    │   │   ├── network.tf
-    │   │   ├── output.tf
-    │   │   ├── startup_script.sh
-    │   │   └── variables.tf
     │   ├── key
-    │   │   ├── keygen.tf
-    │   │   └── output.tf
     │   └── vpn
-    │       ├── aws_gateway.tf
-    │       ├── gcp_gateway.tf
-    │       └── variables.tf
     ├── outputs.tf
     ├── terraform.tfvars
     └── variables.tf
 ```
+
+### Cloud Infastructure Diagram
+![diagram](/docs/diagram.jpg)
+
 ## Deployment 
 Navigate to `terraform` project directory (the one that contains `main.tf`)
 
@@ -90,10 +69,12 @@ gcp_ssh_command = " ssh -i key.pem annafaysaljosh@34.73.160.205"
 gcp_vm_private_ip = "10.10.100.2"
 gcp_vm_public_ip = "34.73.160.205"
 ```
-Open two terminals and use the generated ssh commands to connect to the AWS and GCP compute instances in thier respective public subnets:
-(just copy and paste, making sure you are still in the `terraform` directory. the ssh keys have already been generated for you by terraform.)
 
-From one instance,  compare the traceroutes to the other cloud's instance's public and private IPs (from output above). 
+Open two terminals and use the generated ssh commands to connect to the AWS and GCP compute instances in thier respective public subnets:
+
+(Just copy and paste, making sure you are still in the `terraform` directory. The ssh keys have been generated for you by terraform.)
+
+From one cloud instance,  compare the traceroutes to the other cloud's instance's public and private IPs (from output above). 
 (Must use ICMP, as that is the trafffic we have enabled.)
 
 ```
