@@ -116,7 +116,8 @@ inside our [variables.tf](../terraform/modules/gcp/variables.tf) file we define 
 variable "project_id" {
     type = string
     description = "the id for the gcp project"
-    default =  "term-project-406220"
+    # default =  "term-project-406220"
+    default =  "term-project-v2"
 }
 
 variable "network_name" {
@@ -128,5 +129,17 @@ variable "network_name" {
 variable "subnet_cidr" {
     type = string
     description = "Subnet CIDR/ Prefix"
+}
+
+variable "machine_type" {
+  description = "VM instance machine type."
+  type        = string
+  default     = "f1-micro"
+}
+
+variable "ssh_public_key" {
+  description = "ssh public key for ssh into compute instace"
+  type        = string
+  sensitive   = true
 }
 ```
