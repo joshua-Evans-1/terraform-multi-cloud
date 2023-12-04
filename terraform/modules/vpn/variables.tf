@@ -1,7 +1,7 @@
 # variable definitions for our vpn module
 variable "name" {
     type = string
-    description = "AWS-GCP vpn"
+    description = "AWS-GCP vpn name"
     default = "gcp-aws-vpn"
 }
 
