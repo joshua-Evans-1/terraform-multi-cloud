@@ -16,3 +16,8 @@ variable "subnet_cidr" {
     description = "Subnet CIDR/ Prefix"
 }
 
+variable "machine_type" {
+  description = "VM instance machine type."
+  type        = string
+  default     = "f1-micro"
+}
