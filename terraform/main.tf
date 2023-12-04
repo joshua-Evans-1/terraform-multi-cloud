@@ -41,4 +41,5 @@ module "vpn" {
     gcp_vpc_id          = module.gcp.network_id
     aws_vpc_id          = module.aws.vpc_id
     aws_route_table_ids = [module.aws.public_route_table_id, module.aws.private_route_table_id]
+    subnet_cidr         = var.gcp_subnet_cidr
 }

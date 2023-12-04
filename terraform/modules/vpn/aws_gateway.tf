@@ -23,10 +23,6 @@ resource "aws_customer_gateway" "customer_gateway1" {
   ip_address = google_compute_ha_vpn_gateway.gcp-gateway.vpn_interfaces[0].ip_address
   type       = "ipsec.1"
 
-  tags       = {
-        Name   = "CGW 1: gpc interface 0"
-    }
-
   depends_on = [
         google_compute_ha_vpn_gateway.gcp-gateway,
     ]
@@ -37,25 +33,17 @@ resource "aws_customer_gateway" "customer_gateway2" {
   ip_address = google_compute_ha_vpn_gateway.gcp-gateway.vpn_interfaces[1].ip_address
   type       = "ipsec.1"
 
-  tags       = {
-        Name   = "CGW 2: gpc interface 1"
-    }
-
   depends_on = [
         google_compute_ha_vpn_gateway.gcp-gateway,
     ]
 }
 
 # Creates a VPN connection between the AWS side VPN gateway, and the GCP side Customer gateway
-resource "aws_vpn_connection" "vpn_conn1" {
+resource "aws_vpn_connection" "vpn1" {
   vpn_gateway_id      = aws_vpn_gateway.gateway.id
   customer_gateway_id = aws_customer_gateway.customer_gateway1.id
   type                = aws_customer_gateway.customer_gateway1.type
   static_routes_only  = false
-
-  tags       = {
-        Name   = "VPN conn 1: cgw 1"
-    }
 
   depends_on = [
         aws_vpn_gateway.gateway,
@@ -63,15 +51,11 @@ resource "aws_vpn_connection" "vpn_conn1" {
     ]
 }
 
-resource "aws_vpn_connection" "vpn_conn2" {
+resource "aws_vpn_connection" "vpn2" {
   vpn_gateway_id      = aws_vpn_gateway.gateway.id
   customer_gateway_id = aws_customer_gateway.customer_gateway2.id
   type                = aws_customer_gateway.customer_gateway2.type
   static_routes_only  = false
-
-  tags       = {
-        Name   = "VPN conn 2: cgw 2"
-    }
 
   depends_on = [
         aws_vpn_gateway.gateway,

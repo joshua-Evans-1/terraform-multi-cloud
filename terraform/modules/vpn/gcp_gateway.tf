@@ -1,21 +1,19 @@
-# I don't thnk this is needed for HA VPN. 
-# resource "google_compute_address" "vpn_ip" {
-#     name        = var.name
-# }
-
 resource "google_compute_ha_vpn_gateway" "gcp-gateway" {
     name        = "${var.name}-ha-gateway"
     network     = var.gcp_vpc_id
 }
 
 resource "google_compute_external_vpn_gateway" "external_gateway" {
-  name            = "aws"
-  redundancy_type = "SINGLE_IP_INTERNALLY_REDUNDANT"
-  project         = var.project_id
-      interface {
-    id            = 0
-    ip_address = aws_vpn_connection.connection.tunnel1_address
-  }
+    name            = "aws"
+    redundancy_type = "FOUR_IPS_REDUNDANCY"
+    project         = var.project_id
+    dynamic "interface" {
+        for_each = local.external_vpn_gateway_interfaces
+        content {
+            id         = interface.key
+            ip_address = interface.value["tunnel_address"]
+        }
+    }
 }
 
 resource "google_compute_router" "router" {
@@ -23,50 +21,82 @@ resource "google_compute_router" "router" {
     network     = var.gcp_vpc_id
 
     bgp{
-        asn     = aws_customer_gateway.google.bgp_asn
+        asn                = var.gcp_asn
+        advertise_mode    = "CUSTOM"
+        advertised_ip_ranges {
+            range = var.subnet_cidr
+        }
     } 
-
-    depends_on  = [
-        aws_customer_gateway.google,
-    ]
 }
 
 resource "google_compute_vpn_tunnel" "vpn_tunnel" {
-    name                            = "${var.name}-tunnel"
-    vpn_gateway                     = google_compute_ha_vpn_gateway.gcp-gateway.id
-    peer_external_gateway           = google_compute_external_vpn_gateway.external_gateway.id
-    shared_secret                   = aws_vpn_connection.connection.tunnel1_preshared_key
-    router                          = google_compute_router.router.id
-    vpn_gateway_interface           = 0
-    peer_external_gateway_interface = 0
-    depends_on = [
-        google_compute_ha_vpn_gateway.gcp-gateway,
-        aws_vpn_connection.connection,
-        google_compute_external_vpn_gateway.external_gateway
-    ]
+    for_each                        = local.external_vpn_gateway_interfaces
+
+    name                            = "gcp-tunnel${each.key}"
+    description                     = "Tunnel to AWS - HA VPN interface ${each.key} to AWS interface ${each.value.tunnel_address}"
+    router                          = google_compute_router.router.self_link
+    ike_version                     = 2
+    shared_secret                   = each.value.shared_secret
+    vpn_gateway                     = google_compute_ha_vpn_gateway.gcp-gateway.self_link
+    vpn_gateway_interface           = each.value.vpn_gateway_interface
+    peer_external_gateway           = google_compute_external_vpn_gateway.external_gateway.self_link
+    peer_external_gateway_interface = each.key
 }
 
-resource "google_compute_router_interface" "router_interface" {
-    name        = "${var.name}-router-interface"
-    router      = google_compute_router.router.name
-    ip_range    = "${aws_vpn_connection.connection.tunnel1_cgw_inside_address}/30"
-    vpn_tunnel  = google_compute_vpn_tunnel.vpn_tunnel.name
+resource "google_compute_router_interface" "interfaces" {
+  for_each   = local.external_vpn_gateway_interfaces
 
-    depends_on  = [
-        google_compute_vpn_tunnel.vpn_tunnel,
-        aws_vpn_connection.connection
-    ]
+  name       = "interface${each.key}"
+  router     = google_compute_router.router.name
+  ip_range   = each.value.cgw_inside_address
+  vpn_tunnel = google_compute_vpn_tunnel.vpn_tunnel[each.key].name
+}
+resource "google_compute_router_peer" "router_peers" {
+  for_each        = local.external_vpn_gateway_interfaces
+
+  name            = "peer${each.key}"
+  router          = google_compute_router.router.name
+  peer_ip_address = each.value.vgw_inside_address
+  peer_asn        = each.value.asn
+  interface       = google_compute_router_interface.interfaces[each.key].name
+
+  # NB: tags not supported here
+  # tags = merge({Name = var.name}, local.interpolated_tags)
 }
 
-resource "google_compute_router_peer" "router_peer" {
-    name = "${var.name}-bgp1"
-    router = google_compute_router.router.name
-    peer_ip_address = aws_vpn_connection.connection.tunnel1_vgw_inside_address
-    peer_asn = aws_vpn_connection.connection.tunnel1_bgp_asn  
-    interface  = google_compute_router_interface.router_interface.name
-
-    depends_on = [
-        google_compute_router_interface.router_interface,
-        google_compute_router.router,
-    ]
+locals {
+    external_vpn_gateway_interfaces = {
+        "0" = {
+            tunnel_address        = aws_vpn_connection.vpn1.tunnel1_address
+            vgw_inside_address    = aws_vpn_connection.vpn1.tunnel1_vgw_inside_address
+            asn                   = aws_vpn_connection.vpn1.tunnel1_bgp_asn
+            cgw_inside_address    = "${aws_vpn_connection.vpn1.tunnel1_cgw_inside_address}/30"
+            shared_secret         = aws_vpn_connection.vpn1.tunnel1_preshared_key
+            vpn_gateway_interface = 0
+        },
+        "1" = {
+            tunnel_address        = aws_vpn_connection.vpn1.tunnel2_address
+            vgw_inside_address    = aws_vpn_connection.vpn1.tunnel2_vgw_inside_address
+            asn                   = aws_vpn_connection.vpn1.tunnel2_bgp_asn
+            cgw_inside_address    = "${aws_vpn_connection.vpn1.tunnel2_cgw_inside_address}/30"
+            shared_secret         = aws_vpn_connection.vpn1.tunnel2_preshared_key
+            vpn_gateway_interface = 0
+        },
+        "2" = {
+            tunnel_address        = aws_vpn_connection.vpn2.tunnel1_address
+            vgw_inside_address    = aws_vpn_connection.vpn2.tunnel1_vgw_inside_address
+            asn                   = aws_vpn_connection.vpn1.tunnel1_bgp_asn
+            cgw_inside_address    = "${aws_vpn_connection.vpn2.tunnel1_cgw_inside_address}/30"
+            shared_secret         = aws_vpn_connection.vpn2.tunnel1_preshared_key
+            vpn_gateway_interface = 1
+        },
+        "3" = {
+            tunnel_address        = aws_vpn_connection.vpn2.tunnel2_address
+            vgw_inside_address    = aws_vpn_connection.vpn2.tunnel2_vgw_inside_address
+            asn                   = aws_vpn_connection.vpn1.tunnel2_bgp_asn
+            cgw_inside_address    = "${aws_vpn_connection.vpn2.tunnel2_cgw_inside_address}/30"
+            shared_secret         = aws_vpn_connection.vpn2.tunnel2_preshared_key
+            vpn_gateway_interface = 1
+        }
+    }
 }
