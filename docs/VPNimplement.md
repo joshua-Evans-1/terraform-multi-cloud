@@ -41,20 +41,21 @@ vpn
 in order to implement a vpn connection on gcp we need
 
 Cloud Router: 
-* A fully distributed and managed Google Cloud service to provide dynamic routing using BGP for the network
+* provides dynamic routing using BGP for the network
 
 HA VPN gateway:
-* A Google-managed VPN gateway running on Google Cloud. Each HA VPN gateway is a regional resource that has two interfaces, each with its own external IP addresses: interface 0 and 1.
+* Each HA VPN gateway is a regional resource that has two interfaces, each with its own external IP addresses: interface 0 and 1.
 
 VPN tunnels: 
 * Connections from the HA VPN gateway to the peer VPN gateway on AWS through which encrypted traffic passes.
 
-Outside IP address for virtual private gateway for connection 1, tunnel 1
-Outside IP address for virtual private gateway for connection 1, tunnel 2
-Outside IP address for virtual private gateway for connection 2, tunnel 1
-Outside IP address for virtual private gateway for connection 2, tunnel 2
+    Outside IP address for virtual private gateway for connection 1, tunnel 1
+
+    Outside IP address for virtual private gateway for connection 1, tunnel 2
+    
+    Outside IP address for virtual private gateway for connection 2, tunnel 1
+    
+    Outside IP address for virtual private gateway for connection 2, tunnel 2
 
 Peer VPN gateway: 
 * Two AWS Site-to-Site VPN endpoints, which are from an AWS virtual private gateway 
-
-
