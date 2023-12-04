@@ -1,4 +1,4 @@
-# teraform implementation
+# terraform implementation
 
 ## working directory
 to start our project in terraform we are going to create a working directory we named it terraform but you can name it whatever you like 
