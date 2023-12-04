@@ -10,7 +10,7 @@ A project that utilizes terraform to create and deploy a highly available VPN co
     * [GCP module](docs/GCPimplement.md)
     * [AWS module](/docs/AWSimplement.md)
     * [VPN module](/docs/VPNimplement.md)
-* [deployment](#deployment)
+* [Deployment](#deployment)
 
 ## Project structure 
 ### cloud infastructure diagram
