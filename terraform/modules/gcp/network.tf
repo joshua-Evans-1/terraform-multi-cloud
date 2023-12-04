@@ -25,19 +25,16 @@ resource "google_compute_firewall" "ssh-rule" {
     network = google_compute_network.project_network.name
     allow {
         protocol = "tcp"
-        ports    = ["22"]
+        ports    = ["22","80","443"]
+
+    }
+    allow {
+        protocol = "icmp"
     }
     source_ranges = ["0.0.0.0/0"]
     depends_on = [ google_compute_network.project_network ]
 }
 
-data "template_file" "nginx" {
-  template = "${file("${path.module}/nginx_install.tpl")}"
-
-  vars = {
-    ufw_allow_nginx = "Nginx HTTP"
-  }
-}
 resource "google_compute_instance" "vm" {
     name = "${var.network_name}-vm"
     machine_type = var.machine_type
@@ -51,10 +48,11 @@ resource "google_compute_instance" "vm" {
     }
 
     network_interface {
-        network = google_compute_subnetwork.vm_subnet.id
+        network = google_compute_network.project_network.id
+        subnetwork = google_compute_subnetwork.vm_subnet.id
         access_config {
         }
     }
-    metadata_startup_script = data.template_file.nginx.rendered
+    metadata_startup_script = file("${path.module}/nginx_install.sh")
     depends_on = [ google_compute_subnetwork.vm_subnet ]
 }
