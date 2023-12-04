@@ -32,15 +32,18 @@ vpn
 ├── gcp_gateway.tf
 └── variables.tf
 ```
-## AWS VPN
+## AWS Side VPN
+The VPN connection is a "Site-to-Site VPN", with IPv4. 
+
+The AWS side of the connection is a VPN gateway (in/out of public subnet). It is connected to two endpoints on the Google side, and the AWS-side VPN gateway manages both connections.
 
 
-
-## GCP VPN
+## GCP Side VPN
 
 in order to implement a vpn connection on gcp we need
 
 Cloud Router: 
+* Cloud Router is a fully distributed and managed Google Cloud service that helps you define custom dynamic routes and scales with your network 
 * provides dynamic routing using BGP for the network
 
 HA VPN gateway:
