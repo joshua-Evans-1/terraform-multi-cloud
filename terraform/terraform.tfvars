@@ -7,6 +7,6 @@ gcp_network_name            = "project"
 
 ## AWS variables
 aws_region                  = "us-east-1"
-aws_iAM                     = "josh_aws_tf"
+aws_iAM                     = "annie_aws_tf"
 aws_cred_file               = "~/.aws/credentials"
 aws_vpc_cidr_block          = "10.100.0.0/16"
