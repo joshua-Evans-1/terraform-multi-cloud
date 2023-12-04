@@ -31,3 +31,8 @@ variable "gcp_asn" {
   type        = number
   default     = 65000
 }
+
+variable "subnet_cidr" {
+    type = string
+    description = "Subnet CIDR/ Prefix"
+}
