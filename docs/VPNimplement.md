@@ -49,8 +49,8 @@ our [gcp_gateway.tf](../terraform/modules/vpn/gcp_gateway.tf) creates a gateway,
 | google_compute_ha_vpn_gateway | gcp-gateway| Represents a VPN gateway running in GCP. This virtual device is managed by Google, but used only by you. This type of VPN Gateway allows for the creation of VPN solutions with higher availability than classic Target VPN Gateways. |
 | google_compute_external_vpn_gateway | external_gateway | Represents a VPN gateway managed outside of GCP. |
 | google_compute_router | router | Represents a Router resource. |
-| google_compute_vpn_tunnel vpn_tunnel | encrypts the clouds internet traffic between vpcs |
-| google_compute_router_interface | router_interface | Manages a Cloud Router interface. | 
+| google_compute_vpn_tunnel | vpn_tunnel | encrypts the clouds internet traffic between vpcs |
+google_compute_router_interface | router_interface | Manages a Cloud Router interface. | 
 | google_compute_router_peer | router_peer | BGP information that must be configured into the routing stack to establish BGP peering. This information must specify the peer ASN and either the interface name, IP address, or peer IP address |
 ## variables
 | name | description | type |
