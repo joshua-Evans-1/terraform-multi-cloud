@@ -30,19 +30,24 @@ resource "aws_security_group" "allow-ssh" {
   }
 }
 
-resource "aws_security_group" "allow-icmp" {
+# fyi: https://stackoverflow.com/questions/65673015/from-port-and-to-port-values-for-icmp-protocol-ingress-rule-aws-security-group-r
+resource "aws_security_group" "allow-ping" {
   vpc_id      = aws_vpc.vpc_network.id
-  name        = "allow-icmp"
+  name        = "allow-ping"
   description = "security group allows icmp in & out (for ping)"
   egress {
+    from_port   = 0
+    to_port     = 0
     protocol    = "icmp"
   }
 
   ingress {
+    from_port   = 0
+    to_port     = 0
     protocol    = "icmp"
   }
   tags = {
-    Name = "allow-icmp"
+    Name = "allow-ping"
   }
 }
 
