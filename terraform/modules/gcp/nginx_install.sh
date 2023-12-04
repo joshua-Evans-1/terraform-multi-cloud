@@ -1,18 +1,9 @@
 #!/bin/bash
-set -e
-echo "*****    Installing Nginx    *****"
 apt update
 apt install -y nginx
 ufw allow '${ufw_allow_nginx}'
-systemctl enable nginx
-systemctl restart nginx
 
-echo "*****   Installation Complteted!!   *****"
-
-touch /var/www/html/index.html
-rm -f /var/www/html/index.nginx-debian.html
-echo "
-
+cat <<EOF > /var/www/html/index.html
 <!DOCTYPE html>
 <html>
 <html>
@@ -20,14 +11,15 @@ echo "
       <head>
          <title>Terraform Webserver</title>
       </head>
-      <p>Add your details:</p>
+      <p>Add your name:</p>
       <form>
          Student Name:<br> <input type=text name=name>
          <br>      
       </form>
+      <p>Database response:</p>
    </body>
 </html>
+EOF
 
-" > /var/www/html/index.html
-
-echo "*****   Startup script completes!!    *****"
+systemctl enable nginx
+systemctl restart nginx
