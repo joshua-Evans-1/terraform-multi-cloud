@@ -1,14 +1,25 @@
 #!/bin/bash
-set -e
-echo "*****    Installing Nginx    *****"
 apt update
 apt install -y nginx
 ufw allow '${ufw_allow_nginx}'
+
+cat <<EOF > /var/www/html/index.html
+<!DOCTYPE html>
+<html>
+<html>
+   <body>
+      <head>
+         <title>Terraform Webserver</title>
+      </head>
+      <p>Add your name:</p>
+      <form>
+         Student Name:<br> <input type=text name=name>
+         <br>      
+      </form>
+      <p>Database response:</p>
+   </body>
+</html>
+EOF
+
 systemctl enable nginx
 systemctl restart nginx
-
-echo "*****   Installation Complteted!!   *****"
-touch /var/www/html/index.html
-echo "Welcome to Google Compute VM Instance deployed using Terraform!!!" > /var/www/html/index.html
-
-echo "*****   Startup script completes!!    *****"
