@@ -41,7 +41,7 @@ vpn
 in order to implement a vpn connection on gcp we need
 
 Cloud Router: 
-* A fully distributed and managed Google Cloud service to provide dynamic routing using BGP for your VPC networks.
+* A fully distributed and managed Google Cloud service to provide dynamic routing using BGP for the network
 
 
 HA VPN gateway:
