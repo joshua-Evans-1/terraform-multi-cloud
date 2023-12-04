@@ -10,7 +10,24 @@ systemctl restart nginx
 echo "*****   Installation Complteted!!   *****"
 
 touch /var/www/html/index.html
-rm -rf /var/www/html/index.nginx-debian.html
-echo "Welcome to Google Compute VM Instance deployed using Terraform!!!" > /var/www/html/index.html
+rm -f /var/www/html/index.nginx-debian.html
+echo "
+
+<!DOCTYPE html>
+<html>
+<html>
+   <body>
+      <head>
+         <title>Terraform Webserver</title>
+      </head>
+      <p>Add your details:</p>
+      <form>
+         Student Name:<br> <input type=text name=name>
+         <br>      
+      </form>
+   </body>
+</html>
+
+" > /var/www/html/index.html
 
 echo "*****   Startup script completes!!    *****"
