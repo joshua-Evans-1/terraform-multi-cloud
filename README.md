@@ -31,7 +31,7 @@ TERRAFORM-MULTI-CLOUD
     └── variables.tf
 ```
 
-### Cloud Infastructure Diagram
+## Cloud Infastructure Diagram
 ![diagram](/docs/diagram.jpg)
 
 ## Deployment 
