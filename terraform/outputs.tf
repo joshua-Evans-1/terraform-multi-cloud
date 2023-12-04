@@ -16,9 +16,9 @@ output "gcp_vm_private_ip" {
 }
 
 output "gcp_ssh_command" {
-    value = " ssh -i ${module.key.private_key_filename} ${module.gcp.gcp_ssh_username}@<IP> "
+    value = " ssh -i ${module.key.private_key_filename} ${module.gcp.gcp_ssh_username}@${module.gcp.gcp_vm_public_ip}"
 }
 
 output "ec2_ssh_command" {
-    value = " ssh -i ${module.key.private_key_filename} ec2-user@<IP> "
+    value = " ssh -i ${module.key.private_key_filename} ec2-user@${module.aws.aws_bastion_public_ip[0]} "
 }
