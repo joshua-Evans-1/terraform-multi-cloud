@@ -13,9 +13,6 @@ resource "google_compute_subnetwork" "subnet" {
 }
 
 ## this creates firewall rules to enable ssh on our gcp vpc
-# FYI great security rules reference: 
-# https://kbrzozova.medium.com/basic-firewall-rules-configuration-in-gcp-using-terraform-a87d268fa84f
-
 resource "google_compute_firewall" "ssh-rule" {
     name    = "${var.network_name}sshrule"
     network = google_compute_network.project_network.name
