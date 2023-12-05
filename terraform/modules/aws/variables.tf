@@ -4,7 +4,7 @@ variable "vpc_cidr_block" {
 }
 
 variable "instance_type" {
-  description = "EC2 instance machine type."
+  description = "EC2 instance machine type"
   type        = string
   default     = "t2.micro"
 }

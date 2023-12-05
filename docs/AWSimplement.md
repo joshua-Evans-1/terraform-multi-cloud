@@ -13,6 +13,8 @@ The private and public subnets were created with the "Private Subnet Database / 
 Example of how the VPC could be extended? 
 ![extensibility example](https://docs.aws.amazon.com/images/AmazonRDS/latest/UserGuide/images/con-VPC-sec-grp.png)
 
+(To be frank, we tried to do it that way first, but quickly realized it was too unwieldy to be testable. That is why the cloud architecture is structured this way - with the desire to be able to add these elements later.)
+
 The VPC has Route Tables that govern the flow of internet traffic in/out of the subnets and internet gateway. AWS is able to implement router-like functionality without a dedicated router node.
 
 ### Private Subnet

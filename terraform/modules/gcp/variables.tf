@@ -2,7 +2,6 @@
 variable "project_id" {
     type = string
     description = "the id for the gcp project"
-    # default =  "term-project-406220"
     default =  "term-project-v2"
 }
 

@@ -16,6 +16,7 @@ resource "google_compute_external_vpn_gateway" "external_gateway" {
     }
 }
 
+#  Cloud Router: We use BGP (Border Gateway Protocol) dynamic routing, so that the BGP-advertised routes from the customer/peer gateway (Amazon side) are automatically propagated to the route table 
 resource "google_compute_router" "router" {
     name        = "${var.name}router"
     network     = var.gcp_vpc_id

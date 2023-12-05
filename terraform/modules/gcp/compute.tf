@@ -1,4 +1,6 @@
+# for getting your logged in google username - needed to create SSH key for the instance
 data "google_client_openid_userinfo" "me" {}
+
 
 resource "google_compute_instance" "vm" {
     name = "${var.network_name}-vm"
@@ -23,6 +25,8 @@ resource "google_compute_instance" "vm" {
         ssh-keys = "${split("@", data.google_client_openid_userinfo.me.email)[0]}:${var.ssh_public_key}"
     }
 
+    # Run a script when creating the instance to install a web server
     metadata_startup_script = file("${path.module}/startup_script.sh")
+
     depends_on = [ google_compute_subnetwork.subnet ]
 }
