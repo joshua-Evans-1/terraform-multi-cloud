@@ -2,13 +2,12 @@
 A project that utilizes terraform to create and deploy a highly available VPN connections between Google Cloud (GCP) and Amazon Web Services (AWS) for direct communication between VPC networks across the two cloud platforms.
 
 
-## Table of Contents
+## Documentation
 
 * [Setup](docs/setup.md)
 * Implementation
-    * [Terraform](/docs/terraformimplementation.md)
-    * [GCP module](docs/GCPimplement.md)
     * [AWS module](/docs/AWSimplement.md)
+    * [GCP module](docs/GCPimplement.md)
     * [VPN module](/docs/VPNimplement.md)
 * [Deployment](#deployment)
 
