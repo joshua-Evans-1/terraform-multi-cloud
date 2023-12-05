@@ -130,3 +130,27 @@ gcloud setup
     ```sh
     gcloud services enable compute.googleapis.com
     ```
+
+terraform.tfvars
+===========
+Update [terraform.tfvars](../terraform/terraform.tfvars) with YOUR information that we obtained during the setup process.
+
+```
+## Google Cloud variable definitions
+gcp_region_name             = "us-east1"
+gcp_cred_file               = "~/.config/gcloud/application_default_credentials.json"
+gcp_project_id              = "term-project-v2"
+ ....
+gcp_network_name            = "project"
+
+## AWS variable definitions 
+aws_region                  = "us-east-1"
+aws_iAM                     = "annie_aws_tf"
+aws_cred_file               = "~/.aws/credentials"
+....
+
+```
+
+Some recommend to not git commit this file so as not to expose secrets. In this project we do not add any secrets to this file. (Local file paths to credentials are not secrets) 
+
+However, be aware of this if you choose to add more variables to this file.
