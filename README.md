@@ -32,7 +32,7 @@ TERRAFORM-MULTI-CLOUD
 ```
 
 ## Cloud Infastructure Diagram
-![diagram](/docs/diagram.jpg)
+![!\[diagram\](/docs/diagram.jpg)](docs/img/multicloud_diagram.jpg)
 
 ## Deployment 
 Navigate to `terraform` project directory (the one that contains `main.tf`)
